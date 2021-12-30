@@ -1,12 +1,12 @@
 <?php
     // refer https://docs.microsoft.com/zh-tw/azure/postgresql/connect-php
 	// Initialize connection variables.
-	$host = "mydemoserver.postgres.database.azure.com";
-    $port = "5432";
-	$database = "mypgsqldb";
-	$user = "mylogin@mydemoserver";
-	$password = "<server_admin_password>";
-	
+	$host = "172.16.91.83";
+	$port = "2001";
+	$database = "lcs";
+	$user = "postgres";
+	$password = "4rfv4rfv";
+
 	// Initialize connection object.
 	$connection = pg_connect("host=$host port=$port dbname=$database user=$user password=$password")
 				or die("Failed to create connection to database: ". pg_last_error(). "<br/>");
@@ -14,8 +14,8 @@
 	print "Successfully created connection to database. <br/>";
 
 	// Perform some SQL queries over the connection.
-	$query = "SELECT * from inventory";
-	$result_set = pg_query($connection, $query) 
+	$query = "SELECT * from barcode";
+	$result_set = pg_query($connection, $query)
 		or die("Encountered an error when executing given sql statement: ". pg_last_error(). "<br/>");
 	while ($row = pg_fetch_row($result_set))
 	{
