@@ -1,16 +1,22 @@
 version: '3'
 services:
+
   nginx:
     image: nginx:1.21.4
     hostname: nginx
     container_name: nginx
     volumes:
-      - ./code:/code
       - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./code:/code
     restart: always
     ports:
       - '80:80'
-      - '443:443'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
   php:
     image: php
     build:
@@ -19,6 +25,7 @@ services:
     container_name: php
     volumes:
       - ./code:/code
+    restart: always
     logging:
       driver: "json-file"
       options:
